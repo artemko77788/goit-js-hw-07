@@ -25,10 +25,9 @@ function onPictureClick(event) {
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-
-  new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-  });
 }
+
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
