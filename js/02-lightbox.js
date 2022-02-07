@@ -30,4 +30,5 @@ function onPictureClick(event) {
 new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
+  fadeSpeed: 170,
 });
