@@ -1,7 +1,7 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
+// console.log(galleryItems);
 
 const gallery = document.querySelector(".gallery");
 const pictureMarkap = createGallery(galleryItems);
@@ -37,4 +37,12 @@ function onPictureClick(event) {
 `);
 
   instance.show();
+
+  window.addEventListener(
+    "keyup",
+    function (e) {
+      if (e.keyCode == 27) instance.close((instance) => instance);
+    },
+    false
+  );
 }
