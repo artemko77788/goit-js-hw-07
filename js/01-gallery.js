@@ -38,11 +38,9 @@ function onPictureClick(event) {
 
   instance.show();
 
-  window.addEventListener(
-    "keyup",
-    function (e) {
-      if (e.keyCode == 27) instance.close((instance) => instance);
-    },
-    false
-  );
+  instance.element({
+    onclose: window.addEventListener("keyup", function (e) {
+      if (e.keyCode == 27) instance.close();
+    }),
+  });
 }
