@@ -32,15 +32,28 @@ function onPictureClick(event) {
     return;
   }
 
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <img src= "${event.target.dataset.source}" >
-`);
+`,
+    {
+      onShow: () => {
+        window.addEventListener("keydown", onEscClick);
+      },
+    },
+    {
+      onClose: () => {
+        window.removeEventListener("keydown", onEscClick);
+      },
+    }
+  );
 
   instance.show();
 
-  instance.element({
-    onclose: window.addEventListener("keyup", function (e) {
-      if (e.keyCode == 27) instance.close();
-    }),
-  });
+  function onEscClick(e) {
+    if (e.keyCode == 27) {
+      instance.close();
+      return;
+    }
+  }
 }
