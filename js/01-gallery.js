@@ -25,6 +25,21 @@ function createGallery(picture) {
     })
     .join("");
 }
+const instance = basicLightbox.create(
+  `
+    <img class ='modal-img' src= "" >
+`,
+  {
+    onShow: () => {
+      window.addEventListener("keydown", onEscClick);
+    },
+  },
+  {
+    onClose: () => {
+      window.removeEventListener("keydown", onEscClick);
+    },
+  }
+);
 
 function onPictureClick(event) {
   event.preventDefault();
@@ -32,28 +47,15 @@ function onPictureClick(event) {
     return;
   }
 
-  const instance = basicLightbox.create(
-    `
-    <img src= "${event.target.dataset.source}" >
-`,
-    {
-      onShow: () => {
-        window.addEventListener("keydown", onEscClick);
-      },
-    },
-    {
-      onClose: () => {
-        window.removeEventListener("keydown", onEscClick);
-      },
-    }
-  );
+  instance.element().querySelector(".modal-img").src =
+    event.target.dataset.source;
 
   instance.show();
+}
 
-  function onEscClick(e) {
-    if (e.keyCode == 27) {
-      instance.close();
-      return;
-    }
+function onEscClick(e) {
+  if (e.keyCode == 27) {
+    instance.close();
+    return;
   }
 }
